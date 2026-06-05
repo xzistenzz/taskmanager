@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: taskmanager-db
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - tasknet
+
+  backend:
+    build: .
+    container_name: taskmanager-api
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/taskmanager
+    depends_on:
+      - mongo
+    networks:
+      - tasknet
+
+volumes:
+  mongo-data:
+
+networks:
+  tasknet:
