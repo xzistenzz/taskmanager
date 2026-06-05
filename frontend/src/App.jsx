@@ -32,25 +32,37 @@ function App() {
     fetchTasks();
   };
 
+  const toggleTask = async (id) => {
+    await fetch(`/api/tasks/${id}`, { method: 'PATCH' });
+    fetchTasks();
+  };
+
   return (
     <div className="container">
-      <h1>Task Manager</h1>
+      <h1>Планировщик</h1>
       <form onSubmit={addTask}>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="New task..."
+          placeholder="Новая задача"
         />
-        <button type="submit">Add</button>
+        <button type="submit">Добавить</button>
       </form>
       <ul>
         {tasks.map(task => (
           <li key={task._id}>
-            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
+            <span 
+              onClick={() => toggleTask(task._id)}
+              style={{ 
+                textDecoration: task.completed ? 'line-through' : 'none',
+                cursor: 'pointer',
+                userSelect: 'none'
+              }}
+            >
               {task.title}
             </span>
-            <button onClick={() => deleteTask(task._id)}>Delete</button>
+            <button onClick={() => deleteTask(task._id)}>Удалить</button>
           </li>
         ))}
       </ul>

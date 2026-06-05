@@ -31,6 +31,14 @@ app.delete('/api/tasks/:id', async (req, res) => {
     res.status(204).send();
 });
 
+app.patch('/api/tasks/:id', async (req, res) => {
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).send('Task not found');
+    task.completed = !task.completed;   // переключаем
+    await task.save();
+    res.json(task);
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', (req, res) => {
