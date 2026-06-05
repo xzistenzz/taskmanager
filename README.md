@@ -29,14 +29,14 @@
 
 ### Инструкция
 1. Клонируйте репозиторий:
-   ```bash
-   git clone https://github.com/yourusername/taskmanager.git
-   cd taskmanager
-   ```
+```bash
+git clone https://github.com/yourusername/taskmanager.git
+cd taskmanager
+```
 2. Соберите и запустите контейнеры:
-  ```bash
-  docker-compose up -d --build
-  ```
+```bash
+docker-compose up -d --build
+```
 3. Откройте приложение в браузере по адресу http://localhost:5000 (или IP-адресу вашего сервера).
 
 ## Структура репозитория
